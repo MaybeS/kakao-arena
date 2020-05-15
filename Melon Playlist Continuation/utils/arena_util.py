@@ -2,21 +2,24 @@
 import io
 import os
 import json
-import distutils.dir_util
 from collections import Counter
+from pathlib import Path
 
 import numpy as np
 
+class Config:
+    data_prefix = Path('./data')
+    arena_data_prefix = Path('./arena_data')
 
-def write_json(data, fname):
+def write_json(data, fname: str):
     def _conv(o):
         if isinstance(o, (np.int64, np.int32)):
             return int(o)
         raise TypeError
 
-    parent = os.path.dirname(fname)
-    distutils.dir_util.mkpath("./arena_data/" + parent)
-    with io.open("./arena_data/" + fname, "w", encoding="utf-8") as f:
+    file = Config.arena_data_prefix.joinpath(fname)
+    file.parent.mkdir(exist_ok=True, parents=True)
+    with io.open(str(file), "w", encoding="utf-8") as f:
         json_str = json.dumps(data, ensure_ascii=False, default=_conv)
         f.write(json_str)
 

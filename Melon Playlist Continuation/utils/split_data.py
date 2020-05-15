@@ -70,8 +70,8 @@ class ArenaSplitter:
 
         return q, a
 
-    def run(self, fname):
-        random.seed(777)
+    def run(self, fname, seed=777):
+        random.seed(seed)
 
         print("Reading data...\n")
         playlists = load_json(fname)
