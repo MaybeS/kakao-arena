@@ -5,8 +5,8 @@ import random
 import fire
 import numpy as np
 
-from arena_util import load_json
-from arena_util import write_json
+from utils.arena_util import load_json
+from utils.arena_util import write_json
 
 
 class ArenaSplitter:
